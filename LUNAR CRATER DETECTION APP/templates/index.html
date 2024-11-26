@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Crater Detection</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+    <!-- Inline Custom CSS -->
+    <style>
+        /* Space Background */
+        body.bg-space {
+            background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Sci-fi Typography and Box Styling */
+        .text-box {
+            background-color: rgba(0, 0, 20, 0.75);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #4d4cff;
+            box-shadow: 0 0 10px rgba(77, 76, 255, 0.6);
+            text-align: center;
+        }
+
+        .text-box h1, .text-box h2, .text-box p {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            color: #e1e1ff;
+            letter-spacing: 1px;
+        }
+
+        .text-box p.lead {
+            color: #b0b3ff;
+            font-size: 1.2rem;
+        }
+
+        /* Custom Glowing Button */
+        .btn-primary {
+            background-color: #4d4cff;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border-radius: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 20px rgba(77, 76, 255, 0.8), 0 0 10px rgba(77, 76, 255, 0.6);
+            animation: pulseGlow 2s infinite;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Glow Animation */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(77, 76, 255, 0.8), 0 0 10px rgba(77, 76, 255, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(77, 76, 255, 1), 0 0 20px rgba(77, 76, 255, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(77, 76, 255, 0.8), 0 0 10px rgba(77, 76, 255, 0.6);
+            }
+        }
+
+        /* Custom File Input Button Styling */
+        .custom-file-input {
+            display: none; /* Hides the default file input */
+        }
+
+        .custom-file-label {
+            background-color: #4d4cff;
+            color: #ffffff;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(77, 76, 255, 0.6);
+        }
+
+        .custom-file-label:hover {
+            background-color: #3a3acc;
+            box-shadow: 0 0 15px rgba(77, 76, 255, 0.8);
+        }
+
+        /* Form and Container Styling */
+        .bg-dark {
+            background-color: rgba(20, 20, 40, 0.8) !important;
+        }
+
+        /* Image Styling */
+        img.img-thumbnail {
+            border: 2px solid #4d4cff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1.display-4 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-space">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container">
+            <a class="navbar-brand text-light" href="#">🌑 Lunar Crater Detection</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container my-5 text-box">
+        <h1 class="display-4 mb-3">Lunar Crater Detection</h1>
+        <p class="lead mb-4">Upload an image of the lunar surface, and our AI model will detect craters for you!</p>
+    </section>
+
+    <!-- Upload Form Section -->
+    <div class="container bg-dark rounded shadow p-5 text-light text-box">
+        <h2 class="mb-4">Upload Your Lunar Image</h2>
+        <form action="/" method="post" enctype="multipart/form-data" class="text-center">
+            <div class="mb-3">
+                <div class="custom-file">
+                    <input type="file" name="file" id="file" class="custom-file-input" required>
+                    <label for="file" class="custom-file-label" style="margin-top: 30px; margin-bottom: 30px;">Choose a Lunar Image</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg mt-3" style="margin-top: 30px; margin-bottom: 30px;">Upload and Predict</button>
+        </form>
+
+        <!-- Prediction Result Section -->
+        {% if result %}
+        <div class="mt-5 text-box">
+            <h2>Prediction: {{ result }}</h2>
+            <img src="{{ image_url }}" alt="Uploaded Image" class="img-thumbnail mt-3" width="300">
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
